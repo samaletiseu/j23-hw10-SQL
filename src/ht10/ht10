@@ -1,0 +1,81 @@
+*Задание:
+*Установить MySQL и MySQL Workbench
+*Создать базу данных
+*Создать таблицу professions со столбцами id и profession_name
+*Добавить в таблицу несколько записей
+*Создать таблицу persons со столбцами id, first_name, last_name, email, phone_number, profession_id. Поля email и phone_number должны быть уникальными. Поле profession_id должно быть внешним ключом и ссылаться на запись в таблице professions
+*Добавить в таблицу несколько записей
+*Написать SQL-запрос, который (с помощью JOIN) выводит имя, фамилию, название профессии, мыло и телефон для всех записей в таблице persons
+
+*Для проверки ДЗ загрузить весь SQL для пунктов 3-7
+
+
+CREATE TABLE professions (
+id INT NOT NULL AUTO_INCREMENT,
+profession_name VARCHAR(255) NOT NULL,
+PRIMARY KEY (id)
+);
+
+INSERT INTO professions (profession_name)
+VALUES ('pm');
+
+INSERT INTO professions (profession_name)
+VALUES ('ba');
+
+INSERT INTO professions (profession_name)
+VALUES ('qa');
+
+INSERT INTO professions (profession_name)
+VALUES ('dev');
+
+INSERT INTO professions (profession_name)
+VALUES ('devops');
+
+INSERT INTO professions (profession_name)
+VALUES ('support');
+
+
+
+CREATE TABLE persons (
+id INT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+phone_number INT,
+profession_id INT NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (profession_id) REFERENCES professions(id)
+);
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Anna', 'Ivanova', 'a.ivanova@mail.ru', 9379992, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Oleg', 'Petrov', 'o.petrov@mail.ru', 5133396, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Irina', 'Sidorova', 'i.sidorova@mail.ru', 9370148, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Igor', 'Nikolaev', 'i.nikolaev@mail.ru', 2123501, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Karina', 'Puntus', 'k.puntus@mail.ru', 2146804, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Daria', 'Germanova', 'd.germanova@mail.ru', 2189113, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Anton', 'Pistov', 'a.pistov@mail.ru', 3462554, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Alex', 'Suhanov', 'a.suhanov@mail.ru', 2100310, );
+
+INSERT INTO persons (first_name, last_name, email, phone_number, profession_id)
+VALUES ('Hulio', 'Domingo', 'h.domingo@mail.ru', 5836603, );
+
+
+
+SELECT pr.first_name, pr.last_name, p.profession_name, pr.email, pr.phone_number
+FROM persons p
+LEFT JOIN professions pr;
